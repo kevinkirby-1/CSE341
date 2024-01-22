@@ -1,0 +1,14 @@
+//LOCALHOST GET ALL
+http://localhost:3000/contacts
+###
+
+// LOCALHOST GET SARA
+http://localhost:3000/contacts/65aecdc27b20443435a233e6
+###
+
+// LOCALHOST GET KEVIN
+http://localhost:3000/contacts/65aece607b20443435a233e7
+###
+
+// LOCALHOST GET SCOTT
+http://localhost:3000/contacts/65aece8b7b20443435a233e8
