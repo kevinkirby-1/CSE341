@@ -12,3 +12,19 @@ http://localhost:3000/contacts/65aece607b20443435a233e7
 
 // LOCALHOST GET SCOTT
 http://localhost:3000/contacts/65aece8b7b20443435a233e8
+###
+
+//render GET ALL
+https://cse341-1sp5.onrender.com/contacts
+###
+
+// LOCALHOST GET SARA
+https://cse341-1sp5.onrender.com/contacts/65aecdc27b20443435a233e6
+###
+
+// render GET KEVIN
+https://cse341-1sp5.onrender.com/contacts/65aece607b20443435a233e7
+###
+
+// render GET SCOTT
+https://cse341-1sp5.onrender.com/contacts/65aece8b7b20443435a233e8
