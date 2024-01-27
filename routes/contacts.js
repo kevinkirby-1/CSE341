@@ -1,9 +1,14 @@
 const routes = require('express').Router()
-const lesson2Controller = require('../controllers/contacts')
+const contactsController = require('../controllers/contacts')
 
-routes.get('/contacts', lesson2Controller.getAll);
+routes.get('/contacts', contactsController.getAll);
 
-routes.get('/contacts/:id', lesson2Controller.getIndividual)
+routes.get('/contacts/:id', contactsController.getIndividual)
 
+routes.post('/contacts', contactsController.createContact)
+
+routes.put('/contacts/:id', contactsController.updateContact)
+
+routes.delete('/contacts/:id', contactsController.deleteContact)
 
 module.exports = routes;
