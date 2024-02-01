@@ -1,21 +1,34 @@
 const { ObjectId } = require('mongodb');
 const connection = require('../db/connection')
 
+// GET ALL CONTACTS
 const getAll = async (req, res) => {
     db = await connection.getDb();
-    data = db.db("contacts").collection("contacts").find();
-    contactsArray = await data.toArray();
-    res.send(contactsArray);
+    try {
+        data = db.db("contacts").collection("contacts").find();
+        contactsArray = await data.toArray();
+        res.send(contactsArray);
+    } catch (e) {
+        res.status(500).send(e.message)
+    }
+
 };
 
+// GET SINGLE CONTACT
 const getIndividual = async (req, res) => {
     const contactId = new ObjectId(req.params.id);
     db = await connection.getDb();
-    data = db.db("contacts").collection("contacts").find({_id: contactId});
-    contactsArray = await data.toArray();
-    res.send(contactsArray[0]);
+    try {
+        data = db.db("contacts").collection("contacts").find({_id: contactId});
+        contactsArray = await data.toArray();
+        res.send(contactsArray[0]);
+    } catch (e) {
+        res.status(500).send(e.message)
+    }
+
 }
 
+// CREATE SINGLE CONTACT
 const createContact = async (req, res) => {
     const data = req.body;
     const contact = {
@@ -36,6 +49,7 @@ const createContact = async (req, res) => {
     }
 }
 
+// UPDATE SINGLE CONTACT
 const updateContact = async (req, res) => {
     const id = new ObjectId(req.params.id);
     const data = req.body;
@@ -58,6 +72,7 @@ const updateContact = async (req, res) => {
 
 }
 
+// DELETE SINGLE CONTACT
 const deleteContact = async  (req, res) => {
     const id = new ObjectId(req.params.id);
 
