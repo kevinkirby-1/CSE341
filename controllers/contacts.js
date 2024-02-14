@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongodb');
+const { ObjectId, ExplainVerbosity } = require('mongodb');
 const connection = require('../db/connection')
 
 // GET ALL CONTACTS
@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
     try {
         data = db.db("contacts").collection("contacts").find();
         contactsArray = await data.toArray();
-        res.send(contactsArray);
+        res.status(200).send(contactsArray);
     } catch (e) {
         res.status(500).send(e.message)
     }
@@ -16,12 +16,15 @@ const getAll = async (req, res) => {
 
 // GET SINGLE CONTACT
 const getIndividual = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(500).json("Contact id is not valid.")
+    }
     const contactId = new ObjectId(req.params.id);
     db = await connection.getDb();
     try {
         data = db.db("contacts").collection("contacts").find({_id: contactId});
         contactsArray = await data.toArray();
-        res.send(contactsArray[0]);
+        res.status(200).send(contactsArray[0]);
     } catch (e) {
         res.status(500).send(e.message)
     }
@@ -51,6 +54,10 @@ const createContact = async (req, res) => {
 
 // UPDATE SINGLE CONTACT
 const updateContact = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(500).json("Contact id is not valid.");
+        return
+    }
     const id = new ObjectId(req.params.id);
     const data = req.body;
     const contact = {
@@ -74,6 +81,10 @@ const updateContact = async (req, res) => {
 
 // DELETE SINGLE CONTACT
 const deleteContact = async  (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(500).json("Contact id is not valid.")
+        return
+    }
     const id = new ObjectId(req.params.id);
 
     db = await connection.getDb();
